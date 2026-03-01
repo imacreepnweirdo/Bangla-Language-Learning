@@ -1,0 +1,32 @@
+[
+  {
+    "bengali": "স্বাগতম",
+    "part_of_speech": "অব্যয়",
+    "spelling": "swagotom",
+    "english": "welcome"
+  },
+  {
+    "bengali": "নমস্কার",
+    "part_of_speech": "অব্যয়", 
+    "spelling": "nomoshkar",
+    "english": "hello"
+  },
+  {
+    "bengali": "ধন্যবাদ",
+    "part_of_speech": "অব্যয়",
+    "spelling": "dhonnobad",
+    "english": "thank you"
+  },
+  {
+    "bengali": "আপনি",
+    "part_of_speech": "সর্বনাম",
+    "spelling": "apni",
+    "english": "you"
+  },
+  {
+    "bengali": "আমি",
+    "part_of_speech": "সর্বনাম",
+    "spelling": "ami",
+    "english": "I"
+  }
+]

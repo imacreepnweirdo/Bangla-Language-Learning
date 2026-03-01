@@ -1,0 +1,32 @@
+[
+  {
+    "bengali": "বসন্ত",
+    "part_of_speech": "বিশেষ্য",
+    "spelling": "boshonto",
+    "english": "spring"
+  },
+  {
+    "bengali": "গ্রীষ্ম",
+    "part_of_speech": "বিশেষ্য",
+    "spelling": "grishsho",
+    "english": "summer"
+  },
+  {
+    "bengali": "শরৎ",
+    "part_of_speech": "বিশেষ্য",
+    "spelling": "shorot",
+    "english": "autumn"
+  },
+  {
+    "bengali": "হেমন্ত",
+    "part_of_speech": "বিশেষ্য",
+    "spelling": "hemonto",
+    "english": "late autumn"
+  },
+  {
+    "bengali": "শীত",
+    "part_of_speech": "বিশেষ্য",
+    "spelling": "shit",
+    "english": "winter"
+  }
+]

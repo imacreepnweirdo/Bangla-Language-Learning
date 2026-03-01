@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS words (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    bengali TEXT NOT NULL,
+    parts TEXT,
+    english TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
