@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+gem 'rspec', '~> 3.12'
+gem 'httparty', '~> 0.21'
+gem 'json', '~> 2.6'
+
+group :development do
+  gem 'pry'
+  gem 'rubocop'
+end

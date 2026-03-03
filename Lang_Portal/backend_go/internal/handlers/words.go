@@ -72,6 +72,11 @@ func (h *WordHandler) GetWords(c *gin.Context) {
 		words = append(words, word)
 	}
 
+	// Ensure words is never nil
+	if words == nil {
+		words = []models.WordWithStats{}
+	}
+
 	totalPages := (totalItems + limit - 1) / limit
 	pagination := models.Pagination{
 		Page:         page,

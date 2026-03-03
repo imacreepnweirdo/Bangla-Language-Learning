@@ -147,10 +147,38 @@ backend_go/
 1. Create JSON files in `db/seeds/`
 2. Run `mage seed` to import
 
+
+## Running all tests
+
+```sh
+rspec spec/api/*
+```
+
 ## Testing
 
+when running tests, use test database for the go app:
+
+```sh
+export DB_PATH=/words.test.db go run cmd/server/main.go 
+```
+
 ```bash
-go test ./...
+rspec spec/api/words_spec.rb
+```
+
+## Kill if already Running
+
+if the port is already in use from running go app prior you can, kill the process
+```sh
+lsof -ti:8081 | xargs kill -9
+```
+
+## Running Mage commands
+
+```sh
+go run github.com/magefile/mage@latest testdb
+go run github.com/magefile/mage@latest dbinit
+go run github.com/magefile/mage@latest seed
 ```
 
 ## License

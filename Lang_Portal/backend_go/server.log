@@ -1,0 +1,29 @@
+nohup: ignoring input
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /api/dashboard/last_study_session --> lang-portal/internal/handlers.(*DashboardHandler).GetLastStudySession-fm (4 handlers)
+[GIN-debug] GET    /api/dashboard/study_progress --> lang-portal/internal/handlers.(*DashboardHandler).GetStudyProgress-fm (4 handlers)
+[GIN-debug] GET    /api/dashboard/quick-stats --> lang-portal/internal/handlers.(*DashboardHandler).GetQuickStats-fm (4 handlers)
+[GIN-debug] GET    /api/study_activities/:id --> lang-portal/internal/handlers.(*StudyActivityHandler).GetStudyActivity-fm (4 handlers)
+[GIN-debug] GET    /api/study_activities/:id/study_sessions --> lang-portal/internal/handlers.(*StudyActivityHandler).GetStudySessions-fm (4 handlers)
+[GIN-debug] POST   /api/study_activities     --> lang-portal/internal/handlers.(*StudyActivityHandler).CreateStudyActivity-fm (4 handlers)
+[GIN-debug] GET    /api/words                --> lang-portal/internal/handlers.(*WordHandler).GetWords-fm (4 handlers)
+[GIN-debug] GET    /api/words/:id            --> lang-portal/internal/handlers.(*WordHandler).GetWord-fm (4 handlers)
+[GIN-debug] GET    /api/groups               --> lang-portal/internal/handlers.(*GroupHandler).GetGroups-fm (4 handlers)
+[GIN-debug] GET    /api/groups/:id           --> lang-portal/internal/handlers.(*GroupHandler).GetGroup-fm (4 handlers)
+[GIN-debug] GET    /api/groups/:id/words     --> lang-portal/internal/handlers.(*GroupHandler).GetGroupWords-fm (4 handlers)
+[GIN-debug] POST   /api/study_sessions/:id/words/:word_id/review --> lang-portal/internal/handlers.(*StudySessionHandler).ReviewWord-fm (4 handlers)
+[GIN-debug] POST   /api/reset_history        --> lang-portal/internal/handlers.(*ResetHandler).ResetHistory-fm (4 handlers)
+[GIN-debug] POST   /api/full_reset           --> lang-portal/internal/handlers.(*ResetHandler).FullReset-fm (4 handlers)
+[GIN-debug] GET    /health                   --> main.main.func2 (4 handlers)
+2026/03/04 00:41:32 Server starting on :8080
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://github.com/gin-gonic/gin/blob/master/docs/doc.md#dont-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [ERROR] listen tcp :8080: bind: address already in use
+2026/03/04 00:41:32 Failed to start server:listen tcp :8080: bind: address already in use
+exit status 1

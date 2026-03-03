@@ -101,6 +101,11 @@ func (h *StudyActivityHandler) GetStudySessions(c *gin.Context) {
 		sessions = append(sessions, session)
 	}
 
+	// Ensure sessions is never nil
+	if sessions == nil {
+		sessions = []models.StudySessionWithDetails{}
+	}
+
 	totalPages := (totalItems + limit - 1) / limit
 	pagination := models.Pagination{
 		Page:         page,

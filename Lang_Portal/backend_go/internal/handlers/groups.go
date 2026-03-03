@@ -64,6 +64,11 @@ func (h *GroupHandler) GetGroups(c *gin.Context) {
 		groups = append(groups, group)
 	}
 
+	// Ensure groups is never nil
+	if groups == nil {
+		groups = []models.GroupWithWordCount{}
+	}
+
 	totalPages := (totalItems + limit - 1) / limit
 	pagination := models.Pagination{
 		Page:         page,
@@ -190,6 +195,11 @@ func (h *GroupHandler) GetGroupWords(c *gin.Context) {
 			continue
 		}
 		words = append(words, word)
+	}
+
+	// Ensure words is never nil
+	if words == nil {
+		words = []models.WordStat{}
 	}
 
 	totalPages := (totalItems + limit - 1) / limit

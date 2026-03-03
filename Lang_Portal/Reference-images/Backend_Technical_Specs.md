@@ -15,6 +15,7 @@ learning portal which will act as three things:
 - The API will be built using Gin
 
 ## Directory Structure
+```
 backend-go/
 |── cmd/
 |   └── server/           # Server setup
@@ -29,6 +30,7 @@ backend-go/
 ├── go.mod                # Go modules file
 └── words.db              # SQLite database (created by mage) 
 
+```
 
 ## Database Schema
 

@@ -1,3 +1,5 @@
+//go:build mage
+
 package main
 
 import (
@@ -195,6 +197,121 @@ func Build() error {
 	return nil
 }
 
+// TestDB creates a test database for testing
+func TestDB() error {
+	fmt.Println("Creating test database...")
+
+	// Use test database path from environment or default
+	dbPath := os.Getenv("DB_PATH")
+	if dbPath == "" {
+		dbPath = "words.test.db"
+	}
+
+	db, err := sql.Open("sqlite3", dbPath)
+	if err != nil {
+		return fmt.Errorf("failed to open test database: %w", err)
+	}
+	defer db.Close()
+
+	if err := db.Ping(); err != nil {
+		return fmt.Errorf("failed to ping test database: %w", err)
+	}
+
+	fmt.Printf("Test database initialized successfully: %s\n", dbPath)
+
+	// Run migrations on test database
+	if err := Migrate(); err != nil {
+		return fmt.Errorf("test database migration failed: %w", err)
+	}
+
+	// Seed test database
+	if err := Seed(); err != nil {
+		return fmt.Errorf("test database seeding failed: %w", err)
+	}
+
+	fmt.Println("Test database setup completed successfully!")
+	return nil
+}
+
+// TestDBSQL creates a test database using SQL file (faster approach)
+func TestDBSQL() error {
+	fmt.Println("Creating test database with SQL...")
+
+	// Use test database path from environment or default
+	dbPath := os.Getenv("DB_PATH")
+	if dbPath == "" {
+		dbPath = "words.test.db"
+	}
+
+	db, err := sql.Open("sqlite3", dbPath)
+	if err != nil {
+		return fmt.Errorf("failed to open test database: %w", err)
+	}
+	defer db.Close()
+
+	if err := db.Ping(); err != nil {
+		return fmt.Errorf("failed to ping test database: %w", err)
+	}
+
+	fmt.Printf("Test database initialized successfully: %s\n", dbPath)
+
+	// Run migrations directly on test database
+	migrationsDir := "db/migrations"
+	files, err := ioutil.ReadDir(migrationsDir)
+	if err != nil {
+		return fmt.Errorf("failed to read migrations directory: %w", err)
+	}
+
+	var migrationFiles []string
+	for _, file := range files {
+		if !file.IsDir() && strings.HasSuffix(file.Name(), ".sql") {
+			migrationFiles = append(migrationFiles, file.Name())
+		}
+	}
+	sort.Strings(migrationFiles)
+
+	for _, file := range migrationFiles {
+		migrationPath := filepath.Join(migrationsDir, file)
+		content, err := ioutil.ReadFile(migrationPath)
+		if err != nil {
+			return fmt.Errorf("failed to read migration file %s: %w", file, err)
+		}
+
+		_, err = db.Exec(string(content))
+		if err != nil {
+			return fmt.Errorf("failed to execute migration %s: %w", file, err)
+		}
+		fmt.Printf("Applied migration: %s\n", file)
+	}
+
+	fmt.Println("All migrations completed successfully")
+
+	// Load and execute SQL test data
+	sqlFile := "db/seeds/test_data.sql"
+	content, err := ioutil.ReadFile(sqlFile)
+	if err != nil {
+		return fmt.Errorf("failed to read SQL seed file %s: %w", sqlFile, err)
+	}
+
+	// Split SQL content into individual statements
+	statements := strings.Split(string(content), ";")
+
+	for _, stmt := range statements {
+		stmt = strings.TrimSpace(stmt)
+		if stmt == "" {
+			continue
+		}
+
+		_, err = db.Exec(stmt)
+		if err != nil {
+			return fmt.Errorf("failed to execute SQL statement '%s': %w", stmt, err)
+		}
+	}
+
+	fmt.Println("Test database setup with SQL completed successfully!")
+	return nil
+}
+
 // Clean removes the database file
 func Clean() error {
 	if err := os.Remove("words.db"); err != nil {
@@ -207,12 +324,4 @@ func Clean() error {
 
 	fmt.Println("Database file removed successfully")
 	return nil
-}
-
-func main() {
-	// This allows the file to be run directly for testing
-	if err := Build(); err != nil {
-		fmt.Printf("Error: %v\n", err)
-		os.Exit(1)
-	}
 }
